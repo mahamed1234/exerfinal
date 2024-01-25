@@ -1,61 +1,66 @@
-import React from 'react';
-import { View, StyleSheet, Text } from 'react-native';
+// npx expo start -- --port=8082
+
+import { StatusBar } from "expo-status-bar";
+import { StyleSheet, Text, View } from "react-native";
+
+
 import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
-import CustomForm from './components/CustomForm';
+import ConnexionPage from "./Screen/ConnexionPage.screen";
+import InscriptionPage from "./Screen/InscriptionPage.screen";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import Dashboard from "./Screen/Dashboard.screen";
 
-const Stack = createStackNavigator();
-
-const App = () => {
-  return (
-    <NavigationContainer>
-      <Stack.Navigator
-        screenOptions={{
-          headerStyle: {
-            backgroundColor: '#954fa1', 
-          },
-          headerTintColor: '#ffffff', 
-          headerTitleStyle: {
-            fontWeight: 'bold',
-          },
-        }}
-      >
-        <Stack.Screen name="Home" component={HomeScreen} />
-      </Stack.Navigator>
-    </NavigationContainer>
-  );
-};
-
-const HomeScreen = () => {
+export default function App() {
+  const Stack = createNativeStackNavigator()
   return (
     <View style={styles.container}>
-      <View style={styles.header}>
-        <Text style={styles.headerText}>Bienvenue dans notre application</Text>
-      </View>
-      <CustomForm />
+      {/* <HomePage></HomePage>
+      <Bouton></Bouton>
+      <State></State>
+
+      <List></List> */}
+
+      <NavigationContainer>
+        <Stack.Navigator initialRouteName="ConnexionPage">
+          <Stack.Screen name="ConnexionPage" component={ConnexionPage} /> 
+          <Stack.Screen name="InscriptionPage" component={InscriptionPage} />
+          <Stack.Screen name="Dashboard" component={Dashboard} />
+        </Stack.Navigator>
+      </NavigationContainer>
+
+      <StatusBar style="auto" />
     </View>
   );
-};
+}
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#be75ca',
-    padding: 20,
+    backgroundColor: "#7F00FF",
+    padding: 30,
+    justifyContent: "center",
   },
-  header: {
-    backgroundColor: '#954fa1',
-    padding: 15,
-    marginBottom: 20,
-    borderRadius: 10,
-    borderWidth: 2,
-    borderColor: '#26c4ec',
-  },
-  headerText: {
+  title: {
     fontSize: 24,
-    fontWeight: 'bold',
-    color: '#ffffff',
+    fontWeight: "bold",
+    textAlign: "center",
+    color: "#aa0aaf",
+    marginBottom: 20,
+  },
+  input: {
+    height: 0,
+    marginBottom: 10,
+    backgroundColor: "#f0f0f0",
+  },
+  button: {
+    marginTop: 10,
+    backgroundColor: "#7F00FF",
+  },
+  btnText: {
+    color: "#fff",
+  },
+  signupButton: {
+    marginTop: 20,
+    backgroundColor: "#7F00FF",
   },
 });
-
-export default App;
